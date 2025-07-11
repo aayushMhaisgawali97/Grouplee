@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Manager AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='task_planner.css') }}">
+
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Task Planner AI</h1>
+      <p>Create structured plans from PDF or text input</p>
+    </header>
+
+    <section class="input-section">
+      <div class="upload-box">
+        <label for="fileUpload">Upload PDF or TXT</label>
+<input type="file" id="fileUpload" accept=".pdf,.txt" />
+      </div>
+
+      <div class="or-divider">OR</div>
+
+      <div class="text-box">
+        <label for="taskText">Enter your task description</label>
+        <textarea id="taskText" rows="8" placeholder="Describe your tasks or goals here..."></textarea>
+      </div>
+
+      <button class="generate-btn">Generate Plan</button>
+    </section>
+
+    <div class="output-box" id="taskPlannerOutput">
+  <p>Your task plan will appear here after processing.</p>
+</div>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+ <script src="{{ url_for('static', filename='task_planner.js') }}"></script>
+
+</body>
+</html>

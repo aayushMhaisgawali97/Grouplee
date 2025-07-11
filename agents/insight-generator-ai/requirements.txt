@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pandas
+matplotlib
+seaborn
+openai
+python-multipart

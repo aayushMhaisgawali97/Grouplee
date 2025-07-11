@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Assessment AI Agent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='assessment_agent.css') }}">
+
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Assessment AI Agent</h1>
+      <p>Your personal assistant for smart feedback & learning guidance</p>
+    </header>
+
+    <section class="upload-section">
+      <h2>Upload Your File</h2>
+      <form id="assessmentForm" enctype="multipart/form-data">
+  <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.txt" />
+  
+  <textarea id="textInput" name="text" placeholder="Or paste your content here..."></textarea>
+
+  <label for="difficulty">Select Difficulty Level:</label>
+  <select id="difficulty" name="difficulty">
+    <option value="easy">Easy</option>
+    <option value="medium" selected>Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+
+  <br /><br />
+  <button type="submit" class="generate-btn">Generate Assessment</button>
+</form>
+
+
+    <section class="output-section">
+      <h2>Assessment Output</h2>
+      <div class="output-box">
+        <h3>Generated Questions</h3>
+        <p id="questions">[Questions will appear here after analysis]</p>
+
+        <h3>Feedback</h3>
+        <p id="feedback">[Feedback will appear here after analysis]</p>
+      </div>
+    </section>
+
+    <section class="assistant-chat">
+      <h2>Your AI Assistant</h2>
+      <div class="chat-box">
+        <div class="chat-log" id="chat-log">
+          <p><strong>AI:</strong> How can I help you with your assessment?</p>
+        </div>
+        <input type="text" placeholder="Type your query..." id="chat-input" />
+        <button id="send-btn">Send</button>
+      </div>
+    </section>
+  </div>
+  <script src="{{ url_for('static', filename='assessment_agent.js') }}"></script>
+
+</body>
+</html>

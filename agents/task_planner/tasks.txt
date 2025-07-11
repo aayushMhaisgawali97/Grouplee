@@ -1,0 +1,9 @@
+Update the homepage UI 
+Reply to customer support tickets 
+write the monthly newsletters 
+fix login bug 
+clean up unused AWS buckets 
+Post instagram updates for product launch
+Backup the database
+Research competitor pricing
+schedule team standup

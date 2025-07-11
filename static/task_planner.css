@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #fdf8f1;
+  color: #333;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #444;
+}
+
+header p {
+  font-size: 1rem;
+  color: #777;
+  margin-top: 10px;
+}
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.upload-box,
+.text-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-box label,
+.text-box label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.upload-box input,
+.text-box textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* Updated Textarea Box Size and Scroll Behavior */
+.text-box textarea {
+  height: 120px;
+  resize: vertical;
+  overflow-y: auto;
+}
+
+.or-divider {
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+}
+
+.generate-btn {
+  padding: 12px 24px;
+  background-color: #e0cba7;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  color: #333;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.generate-btn:hover {
+  background-color: #d2ba94;
+}
+
+.output-section {
+  margin-top: 40px;
+}
+
+.output-section h2 {
+  font-size: 1.4rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* Increased Height of Output Box */
+.output-box {
+  background-color: #fcf9f4;
+  border: 1px solid #e4dcd0;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  color: #666;
+}
