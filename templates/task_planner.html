@@ -4,10 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Task Manager AI</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='task_planner.css') }}">
-
+  <link rel="stylesheet" href="{{url_for('static', filename='task_planner.css')}}">
 </head>
 <body>
+    <!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="close-btn" onclick="toggleSidebar()">✖</span>
+  </div>
+  <ul class="sidebar-menu">
+    <li>➕ New Chat</li>
+    <li>🕘 History</li>
+    <li>⚙️ Settings</li>
+  </ul>
+</div>
+
+<!-- Menu Toggle -->
+<div class="menu-toggle" onclick="toggleSidebar()">☰</div>
   <div class="container">
     <header>
       <h1>Task Planner AI</h1>
@@ -16,8 +29,8 @@
 
     <section class="input-section">
       <div class="upload-box">
-        <label for="fileUpload">Upload PDF or TXT</label>
-<input type="file" id="fileUpload" accept=".pdf,.txt" />
+        <label for="pdfUpload">Upload PDF</label>
+       <input type="file" id="fileUpload" accept=".pdf,.txt" />
       </div>
 
       <div class="or-divider">OR</div>
@@ -30,12 +43,24 @@
       <button class="generate-btn">Generate Plan</button>
     </section>
 
-    <div class="output-box" id="taskPlannerOutput">
+    <section class="output-section">
+      <h2>Generated Plan</h2>
+      <div class="output-box" id="taskPlannerOutput">
   <p>Your task plan will appear here after processing.</p>
 </div>
 
+    </section>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+   <script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const toggle = document.querySelector('.menu-toggle');
+    sidebar.classList.toggle('active');
+        toggle.style.display = sidebar.classList.contains('active') ? 'none' : 'block';
+  }
+</script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
  <script src="{{ url_for('static', filename='task_planner.js') }}"></script>
 
 </body>

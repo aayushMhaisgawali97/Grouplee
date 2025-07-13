@@ -50,13 +50,22 @@ def index():
 def task_planner_page():
     return render_template("task_planner.html")
 
-@app.route('/assessment-agent')
+@app.route('/assessment_agent')
 def assessment_agent_page():
     return render_template("assessment_agent.html")
 
 @app.route('/summarizer-agent')
 def summarizer_agent_page():
     return render_template("summarizer_agent.html")
+
+@app.route('/content-generator')
+def content_generator_page():
+    return render_template("content_generator.html")
+
+@app.route('/insight-generator')
+def insight_generator_page():
+    return render_template("insight_generator.html")
+
 
 # --------- Task Planner AI Endpoint --------- #
 @app.route('/task_planner', methods=['POST'])
@@ -147,7 +156,7 @@ Format your output clearly like this:
 """
 
         response = client.chat.completions.create(
-            model="gpt-4.1-nano-2025-04-14",
+            model= "gpt-4.1-nano-2025-04-14",
             messages=[{"role": "user", "content": prompt}]
         )
 
@@ -198,3 +207,60 @@ Summary:"""
 # ---------------- RUN ---------------- #
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+@app.route('/moderator', methods=['POST'])
+def moderator():
+    try:
+        task = request.json.get("task", "")
+        if not task:
+            return jsonify({"error": "❌ No task provided."})
+
+        # Use GPT to decide which agent to call
+        decision_prompt = f"""You are a smart AI moderator.
+Given the following user request, decide which agent should handle it.
+
+Agents:
+1. summarizer - Summarizes documents or text
+2. assessment_agent - Generates quiz questions from content
+3. task_planner - Organizes a list of tasks into priorities
+
+User Task:
+\"\"\"{task}\"\"\"
+
+Respond ONLY with the agent name: summarizer, assessment_agent, or task_planner."""
+
+        decision = client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[{"role": "user", "content": decision_prompt}]
+        ).choices[0].message.content.strip().lower()
+
+        if "summarizer" in decision:
+            response = client.chat.completions.create(
+                model="gpt-4-turbo",
+                messages=[{"role": "user", "content": f"Summarize this:\n{task}"}]
+            )
+            result = response.choices[0].message.content.strip()
+            return jsonify({"agent_used": "summarizer", "output": result})
+
+        elif "assessment" in decision:
+            response = client.chat.completions.create(
+                model="gpt-4-turbo",
+                messages=[{"role": "user", "content": f"Generate quiz from this:\n{task}"}]
+            )
+            result = response.choices[0].message.content.strip()
+            return jsonify({"agent_used": "assessment_agent", "output": result})
+
+        elif "task_planner" in decision:
+            response = client.chat.completions.create(
+                model="gpt-4-turbo",
+                messages=[{"role": "user", "content": f"Plan tasks:\n{task}"}]
+            )
+            result = response.choices[0].message.content.strip()
+            return jsonify({"agent_used": "task_planner", "output": result})
+
+        else:
+            return jsonify({"error": f"❌ Couldn't identify a matching agent from: {decision}"})
+
+    except Exception as e:
+        return jsonify({"error": f"❌ Moderator error: {str(e)}"})

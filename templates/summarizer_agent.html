@@ -3,22 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Summarizer Agent</title>
-  <link rel="stylesheet" href="{{url_for('static', filename='summarizer.css')}}">
-  
+  <title>Summarizer AI Chat</title>
+   <link rel="stylesheet" href="{{url_for('static', filename='summ.css')}}">
 </head>
 <body>
-  <main class="main-content">
-    <h1>📄 Summarizer Agent</h1>
-    <p>Upload a PDF, DOCX, or TXT file to generate a summary.</p>
+  <!-- Toggle Button -->
+  <button id="menuToggle" class="menu-toggle">☰</button>
 
-    <form id="summarizerForm" enctype="multipart/form-data">
-      <input type="file" id="fileInput" name="file" accept=".pdf,.docx,.txt" required />
-      <button type="submit">Generate Summary</button>
-    </form>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>📄 AI Chat</h2>
+        <button class="close-btn" id="closeSidebar">✖</button>
+      </div>
+      <button>➕ New Chat</button>
+      <button>🕘 History</button>
+      <button>⚙️ Settings</button>
+    </aside>
 
-    <div id="summaryResult" style="margin-top: 20px;"></div>
-  </main>
+    <!-- Main Content -->
+    <main class="main-content">
+      <header>
+        <h1>📄 Summarizer AI Agent</h1>
+        <p>Upload your PDF or Word document and receive a smart summary!</p>
+      </header>
+
+      <section class="chat-section">
+        <div class="chat bot">
+        
+        </div>
+      </section>
+
+      <!-- Summary Display -->
+<div id="summaryResult" style="margin: 20px 0; font-size: 1rem;"></div>
+
+<!-- Form with correct IDs -->
+<form class="input-area" id="summarizerForm">
+  <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.txt" required />
+  <button type="submit">Send</button>
+</form>
+
+
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('closeSidebar');
+
+    menuToggle.onclick = () => {
+      sidebar.classList.add('sidebar-open');
+      menuToggle.style.display = 'none';
+    };
+
+    closeBtn.onclick = () => {
+      sidebar.classList.remove('sidebar-open');
+      menuToggle.style.display = 'block';
+    };
+  </script>
 
   <script src="{{ url_for('static', filename='summarizer_agent.js') }}"></script>
 </body>

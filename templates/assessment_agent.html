@@ -4,10 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Assessment AI Agent</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='assessment_agent.css') }}">
-
+ <link rel="stylesheet" href="{{url_for('static', filename='assessment_agent.css')}}">
 </head>
 <body>
+  <div class="sidebar" id="sidebar">
+  <button class="close-btn" id="closeSidebar">×</button>
+  <ul>
+    <li><a href="#">➕ New Chat</a></li>
+    <li><a href="#">🕓 History</a></li>
+    <li><a href="#">⚙️ Settings</a></li>
+  </ul>
+</div>
+
+<!-- Menu Toggle -->
+<button class="menu-toggle" id="menuToggle">☰</button>
   <div class="container">
     <header>
       <h1>Assessment AI Agent</h1>
@@ -15,22 +25,23 @@
     </header>
 
     <section class="upload-section">
-      <h2>Upload Your File</h2>
-      <form id="assessmentForm" enctype="multipart/form-data">
-  <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.txt" />
-  
-  <textarea id="textInput" name="text" placeholder="Or paste your content here..."></textarea>
+  <h2>Upload Your File</h2>
+  <form id="assessmentForm" method="POST" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="file" accept=".pdf,.ppt,.pptx,.doc,.docx" required />
+    
+    <textarea id="textInput" name="text" placeholder="Or paste your content here..."></textarea>
 
-  <label for="difficulty">Select Difficulty Level:</label>
-  <select id="difficulty" name="difficulty">
-    <option value="easy">Easy</option>
-    <option value="medium" selected>Medium</option>
-    <option value="hard">Hard</option>
-  </select>
+    <label for="difficulty">Select Difficulty Level:</label>
+    <select id="difficulty" name="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium" selected>Medium</option>
+      <option value="hard">Hard</option>
+    </select>
 
-  <br /><br />
-  <button type="submit" class="generate-btn">Generate Assessment</button>
-</form>
+    <button type="submit">Generate Assessment</button>
+  </form>
+</section>
+
 
 
     <section class="output-section">
@@ -55,7 +66,23 @@
       </div>
     </section>
   </div>
-  <script src="{{ url_for('static', filename='assessment_agent.js') }}"></script>
+  <script>
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const closeSidebar = document.getElementById('closeSidebar');
+
+  menuToggle.addEventListener('click', () => {
+    sidebar.classList.add('open');
+    menuToggle.style.display = 'none';
+  });
+
+  closeSidebar.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    menuToggle.style.display = 'block';
+  });
+</script>
+
+<script src="{{ url_for('static', filename='assessment_agent.js') }}"></script>
 
 </body>
 </html>

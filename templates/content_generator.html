@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Content Generator AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='content_generator.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="close-btn" onclick="toggleSidebar()">✖</span>
+  </div>
+  <ul class="sidebar-menu">
+    <li>➕ New Chat</li>
+    <li>🕘 History</li>
+    <li>⚙️ Settings</li>
+  </ul>
+</div>
+
+<!-- Menu Toggle -->
+<div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+
+<div class="container">
+  <div class="form-box">
+    <h1>Generate Content with AI</h1>
+    <p>Create PPTs, images, reports, and text instantly.</p>
+
+    <label for="type">Choose Type:</label>
+    <select id="type">
+      <option value="">Select</option>
+      <option value="image">Image</option>
+      <option value="Report">Report</option>
+      <option value="ppt">PPT</option>
+      <option value="text">Text</option>
+    </select>
+
+    <label for="topic">Your Topic:</label>
+    <textarea id="topic" placeholder="Prompt here"></textarea>
+
+    <button onclick="callContentGenerator()">Generate</button>
+  </div>
+
+  <div id="result-box"></div>
+</div>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.querySelector('.menu-toggle');
+  sidebar.classList.toggle('active');
+  toggle.style.display = sidebar.classList.contains('active') ? 'none' : 'block';
+}
+</script>
+
+<script src="{{ url_for('static', filename='content_generator.js') }}"></script>
+</body>
+</html>

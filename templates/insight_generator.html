@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Insight Generator AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='insight_generator.css') }}" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="close-btn" onclick="toggleSidebar()">✖</span>
+    </div>
+    <ul class="sidebar-menu">
+      <li>📄 Templates</li>
+      <li>🕘 History</li>
+      <li>⚙️ Settings</li>
+    </ul>
+  </div>
+
+  <!-- Menu Toggle -->
+  <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+
+  <div class="container">
+    <h1>Insight Generator AI</h1>
+    <p class="tagline">Upload your dataset and get rich visual analytics instantly</p>
+
+    <div class="upload section">
+      <input type="file" id="file-upload" class="default-file" />
+      <!-- ✅ Add onclick -->
+      <button class="generate-btn" onclick="callInsightGenerator()">Generate Insights</button>
+
+    </div>
+
+    <div id="insight-result"></div> <!-- ✅ Where you can show results if you want -->
+
+    <div class="chart-section">
+      <h2>Generated Charts</h2>
+      <div class="charts">
+        <div class="chart-box">Chart 1 (Preview)</div>
+        <div class="chart-box">Chart 2 (Preview)</div>
+        <div class="chart-box">Chart 3 (Preview)</div>
+      </div>
+      <!-- If you want download to do something later -->
+      <button class="download-btn" onclick="downloadCharts()">⬇ Download Charts</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.querySelector('.menu-toggle');
+      sidebar.classList.toggle('active');
+      toggle.style.display = sidebar.classList.contains('active') ? 'none' : 'block';
+    }
+  </script>
+  <script src="{{ url_for('static', filename='insight_generator.js') }}"></script>
+
+</body>
+</html>
